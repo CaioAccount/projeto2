@@ -127,17 +127,41 @@ unidade="horas"
 break
 
 case "brl_usd":
+
+try{
+
 let dados1=await fetch("https://api.exchangerate-api.com/v4/latest/BRL")
 let json1=await dados1.json()
+
 resultado=valor*json1.rates.USD
 unidade="USD"
+
+}catch{
+
+document.getElementById("resultado").innerText="Erro ao buscar câmbio"
+return
+
+}
+
 break
 
 case "usd_brl":
+
+try{
+
 let dados2=await fetch("https://api.exchangerate-api.com/v4/latest/USD")
 let json2=await dados2.json()
+
 resultado=valor*json2.rates.BRL
 unidade="BRL"
+
+}catch{
+
+document.getElementById("resultado").innerText="Erro ao buscar câmbio"
+return
+
+}
+
 break
 
 }
@@ -170,7 +194,7 @@ function mostrarHistorico(){
 let lista=""
 
 historico.forEach(item=>{
-lista+="<div>"+item+"</div>"
+lista+=`<div class="historico-item">${item}</div>`
 })
 
 document.getElementById("historico").innerHTML=lista
@@ -187,7 +211,7 @@ mostrarHistorico()
 
 function favoritar(){
 
-if(ultimoResultado==="")return
+if(ultimoResultado==="") return
 
 favoritos.unshift(ultimoResultado)
 
@@ -232,18 +256,9 @@ function inverter(){
 
 let tipo=document.getElementById("tipo")
 
-let mapa={
-c_f:"f_c",
-f_c:"c_f",
-km_mi:"mi_km",
-mi_km:"km_mi",
-kg_lb:"lb_kg",
-lb_kg:"kg_lb"
-}
+let partes=tipo.value.split("_")
 
-if(mapa[tipo.value]){
-tipo.value=mapa[tipo.value]
-}
+tipo.value=partes[1]+"_"+partes[0]
 
 }
 

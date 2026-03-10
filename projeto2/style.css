@@ -10,13 +10,13 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#667eea,#764ba2);
+background:linear-gradient(135deg,#000000,#041f68);
 color:white;
 transition:0.3s;
 }
 
 body.claro{
-background:#f4f4f4;
+background:#0a6b84;
 color:black;
 }
 
